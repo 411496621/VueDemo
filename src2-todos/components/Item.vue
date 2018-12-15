@@ -1,10 +1,10 @@
 <template>
   <li :style="{background:bgColor}" @mouseenter="hover(true)" @mouseleave="hover(false)">
     <label>
-      <input type="checkbox" v-model="todo.complete" />
+      <input type="checkbox" v-model="todo.complete">
       <span>{{todo.title}}</span>
     </label>
-    <button class="btn btn-danger" @click="removeItem(index)" v-show="isShow">删除</button>
+    <button class="btn btn-danger" :class="{active:isShow}" @click="removeItem"  >删除</button>
   </li>
 </template>
 
@@ -19,24 +19,24 @@
       index:Number
     },
     data(){
-      return{
-        isShow:false,
-        bgColor:'#fff'
+      return {
+        bgColor:'#fff',
+        isShow:false
       }
     },
     methods:{
       hover(type){
-        if(type){ // 此时颜色为灰色 显示按钮
+        if(type){ //颜色变灰 显示
+          this.bgColor = "#ccc"
           this.isShow = true
-          this.bgColor = '#ccc'
         }else{
-          this.isShow = false
           this.bgColor = "#fff"
+          this.isShow = false
         }
       },
-      removeItem(index){
-        if(window.confirm(`确认要删除${this.todo.title}吗？`)){
-           this.deleteTodo(index)
+      removeItem(){
+        if(window.confirm(`确认要删除${this.todo.title}吗`)){
+          this.deleteTodo(this.index)
         }
       }
     }
@@ -67,7 +67,11 @@
 
   li button {
     float: right;
+    display: none;
     margin-top: 3px;
+  }
+  li button.active{
+    display:block;
   }
 
   li:before {

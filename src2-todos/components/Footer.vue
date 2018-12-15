@@ -1,12 +1,12 @@
 <template>
   <div class="todo-footer">
     <label>
-      <input v-model="isSelectedAll" type="checkbox"/>
+      <input type="checkbox" v-model="isAll">
     </label>
     <span>
-          <span>已完成{{selectedCount}}</span> / 全部{{todos.length}}
-        </span>
-    <button class="btn btn-danger" v-show="selectedCount" @click="deleteSelectedTodos">清除已完成任务</button>
+      <span>已完成{{selectedCount}}</span> / 全部{{todos.length}}
+    </span>
+    <button class="btn btn-danger" v-show="selectedCount>0" @click="deleteSelected">清除已完成任务</button>
   </div>
 </template>
 
@@ -14,27 +14,32 @@
   export default {
     props:{
       todos:Array,
-      selectAllTodos:{
+      deleteSelected:{
         type:Function,
         required:true
       },
-      deleteSelectedTodos:{
+      selectAll:{
         type:Function,
         required:true
       }
     },
     computed:{
+      // 计算属性 被选中的个数
       selectedCount(){
-         return this.todos.reduce((prev,curr)=>prev + (curr.complete?1:0),0)
+        return this.todos.reduce((prev,curr)=>{
+          return prev + (curr.complete? 1:0)
+        },0)
       },
-      isSelectedAll:{
+      // 计算属性 看是否全部被选中
+      isAll:{
         get(){
-          return this.todos.length === this.selectedCount && this.selectedCount
+          return this.selectedCount === this.todos.length && this.selectedCount
         },
         set(value){
-          this.selectAllTodos(value)
+          this.selectAll(value)
         }
       }
+
     }
   }
 </script>
@@ -65,4 +70,5 @@
     float: right;
     margin-top: 5px;
   }
+
 </style>

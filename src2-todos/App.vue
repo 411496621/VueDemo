@@ -1,22 +1,24 @@
 <template>
   <div class="todo-container">
     <div class="todo-wrap">
-      <Header :addTodo="addTodo"/>
+      <Header :todos="todos" :addTodo="addTodo" /> <!-- :addTodo ='addTodo.bind(this)' -->
       <List :todos="todos" :deleteTodo="deleteTodo" />
-      <Footer :selectAllTodos="selectAllTodos" :deleteSelectedTodos="deleteSelectedTodos" :todos="todos"/>
+      <Footer :todos="todos" :selectAll="selectAll" :deleteSelected="deleteSelected" />
     </div>
   </div>
 </template>
 
-<script >
+<script>
   import Header from "./components/Header"
   import List from "./components/List"
   import Footer from "./components/Footer"
   import {readTodos,saveTodos} from "./untils/StorageUntils"
+  import "./base.css"
   export default {
+    /*数据定义在哪 修改数据的方法就定义在哪*/
     data(){
       return {
-        todos:readTodos()
+        todos: readTodos()
       }
     },
     methods:{
@@ -26,12 +28,15 @@
       deleteTodo(index){
         this.todos.splice(index,1)
       },
-      selectAllTodos(isAll){
-        this.todos = this.todos.map( item=>({complete:isAll,title:item.title}) )
+      // 删除选中的部分
+      deleteSelected(){
+         this.todos = this.todos.filter((item)=> !item.complete )
       },
-      deleteSelectedTodos(){
-        this.todos = this.todos.filter(item=>!item.complete)
+      // 是否选中所有的todo
+      selectAll(isAll){
+        this.todos.map((item)=>item.complete = isAll)
       }
+
     },
     components:{
       Header,
@@ -43,14 +48,13 @@
         deep:true,
         handler:saveTodos
       }
-
     }
-
 
   }
 </script>
 
 <style scoped>
+
   /*app*/
   .todo-container {
     width: 600px;
@@ -61,4 +65,5 @@
     border: 1px solid #ddd;
     border-radius: 5px;
   }
+
 </style>

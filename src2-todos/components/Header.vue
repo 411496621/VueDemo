@@ -1,12 +1,13 @@
 <template>
   <div class="todo-header">
-    <input @keyup.enter="createNewTodo" type="text" v-model="title" placeholder="请输入你的任务名称，按回车键确认"/>
+    <input type="text" placeholder="请输入你的任务名称，按回车键确认" @keyup.enter="save" v-model="msg">
   </div>
 </template>
 
 <script>
   export default {
     props:{
+      todos:Array,
       addTodo:{
         type:Function,
         required:true
@@ -14,19 +15,18 @@
     },
     data(){
       return {
-        title:''
+        msg:''
       }
     },
     methods:{
-      createNewTodo(){
-        const title = this.title.trim()
-        if(title){ // 如果不为空的话 将数据添加到todos
-          this.addTodo({complete:false,title})
-          this.title = '' // 清空表单
+      save(){
+        const value = this.msg.trim()
+        if(value){
+          this.addTodo({complete:false,title:value})
+          this.msg = ""
         }
       }
     }
-
   }
 </script>
 
