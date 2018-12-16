@@ -1,12 +1,9 @@
 import Vue from "vue"
-import VueResource from "vue-resource"
 import App from "./App"
-import "./assets/index.css"
-
-Vue.use(VueResource)
+import "./base.css"
 
 new Vue({
-  el : '#app',
+  el:"#app",
   components:{
     App
   },
