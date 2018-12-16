@@ -1,14 +1,12 @@
 import Vue from "vue"
-import VueResource from "vue-resource"
 import App from "./App"
-import "./assets/index.css"
-
-Vue.use(VueResource)
+import router from "./router"
 
 new Vue({
   el : '#app',
   components:{
     App
   },
-  template:'<App/>'
+  template:'<App/>',
+  router
 })
