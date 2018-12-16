@@ -9,13 +9,10 @@
 </template>
 
 <script>
+  import PubSub from "pubsub-js"
   export default {
     props:{
       todo:Object,
-      deleteTodo:{
-        type:Function,
-        required:true
-      },
       index:Number
     },
     data(){
@@ -36,7 +33,7 @@
       },
       removeItem(index){
         if(window.confirm(`确认要删除${this.todo.title}吗？`)){
-           this.deleteTodo(index)
+          PubSub.publish('deleteTodo',index)
         }
       }
     }

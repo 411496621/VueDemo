@@ -6,12 +6,7 @@
 
 <script>
   export default {
-    props:{
-      addTodo:{
-        type:Function,
-        required:true
-      }
-    },
+
     data(){
       return {
         title:''
@@ -21,7 +16,8 @@
       createNewTodo(){
         const title = this.title.trim()
         if(title){ // 如果不为空的话 将数据添加到todos
-          this.addTodo({complete:false,title})
+          /*this.addTodo({complete:false,title})*/   //触发事件 传递数据
+          this.$emit("addTodo",{complete:false,title})
           this.title = '' // 清空表单
         }
       }
