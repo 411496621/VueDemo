@@ -4,11 +4,11 @@ import Home from "../views/Home"
 import About from "../views/About"
 import News from "../views/News"
 import Messages from "../views/Messages"
-import Message from "../views/Message"
-
+import Message from '../views/Message'
 Vue.use(VueRouter)
+
 export default new VueRouter({
-  mode:'history', // 去掉路径中的#号
+
   routes:[
     {
       path:'/home',
@@ -19,12 +19,11 @@ export default new VueRouter({
           component:News
         },
         {
-          path:'messages',
+          path:'message',
           component:Messages,
           children:[
             {
-              name:'message',
-              path:'/home/messages/:id',
+              path:"/home/message/:index",
               component:Message
             }
           ]
@@ -43,5 +42,6 @@ export default new VueRouter({
       path:'/',
       redirect:'/about'
     }
+
   ]
 })

@@ -1,36 +1,33 @@
 <template>
   <ul>
     <li>{{message.id}}</li>
-    <li>{{message.name}}</li>
+    <li>{{message.title}}</li>
     <li>{{message.content}}</li>
   </ul>
 </template>
 
 <script>
   const messages = [
-    {id:1,name:'message 001',content:'message content 001 '},
-    {id:2,name:'message 002',content:'message content 002 '},
-    {id:4,name:'message 004',content:'message content 004 '}
+    {id:1,title:'message001',content:'message content001'},
+    {id:2,title:'message002',content:'message content002'},
+    {id:4,title:'message004',content:'message content004'}
   ]
   export default {
-    data() {
-      return {
-        message: {}
+    data(){
+      return{
+        message:{}
       }
     },
     mounted(){
-      this.showUI(this.$route)
-    },
-    methods:{
-      showUI(route){
-        const id = route.params.index *1
-        const message = messages.find(item=>item.id===id)
-        this.message = message
-      }
+      const {id} = this.$route.params
+      const message = messages.find(item=>item.id===id*1)
+      this.message = message
     },
     watch:{
       $route(value){
-        this.showUI(value)
+        const id = value.params.id
+        const message = messages.find(item=>item.id===id*1)
+        this.message = message
       }
     }
   }

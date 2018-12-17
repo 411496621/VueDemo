@@ -1,7 +1,7 @@
 <template>
   <ul>
-    <li v-for="(Item,index) in news" :key="index">
-      {{Item}}
+    <li v-for="(item,index) in data" :key="index">
+      {{item}}
     </li>
   </ul>
 </template>
@@ -9,8 +9,8 @@
 <script>
   export default {
     data(){
-      return{
-        news:['news001','news002','news004']
+      return {
+        data:['news001','news002','news004']
       }
     }
   }

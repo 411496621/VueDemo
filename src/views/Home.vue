@@ -3,22 +3,22 @@
     <h2>
       Home组件
     </h2>
-    <ul class="nav nav-tabs">
-      <li>
-        <router-link to="/home/news">News</router-link>
-      </li>
-      <li>
-        <!--<a href="/home/message" class="myActive" aria-current="page">Message</a>-->
-        <router-link to="/home/message">Message</router-link>
-      </li>
-    </ul>
-    <router-view />
+    <div>
+      <ul class="nav nav-tabs">
+        <li><router-link to="/home/news">News</router-link></li>
+        <li><router-link to="/home/messages">Home</router-link></li>
+      </ul>
+      <router-view />
+    </div>
   </div>
-
 </template>
 
 <script>
-  export default {}
+  export default {
+    mounted() {
+      console.log("Home")
+    }
+  }
 </script>
 
 <style scoped>
